@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmacie Lead Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      background-color: #e9ecef;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Farmacie Lead Tool</h1>
+  <p>Inserisci l'URL di una pagina Facebook per recuperarne i dati pubblici (nome ed email).</p>
+
+  <label for="fbPage">URL della pagina Facebook:</label>
+  <input type="text" id="fbPage" placeholder="https://www.facebook.com/NomeFarmacia">
+
+  <button onclick="getPageData()">Recupera dati</button>
+
+  <div class="result" id="output"></div>
+
+  <p><a href="privacy_bilingual.html" target="_blank">Leggi la Privacy Policy</a></p>
+
+  <script>
+    async function getPageData() {
+      const page = document.getElementById("fbPage").value.trim();
+      const output = document.getElementById("output");
+
+      if (!page) {
+        output.innerHTML = "⚠️ Inserisci un URL valido.";
+        return;
+      }
+
+      const pageId = page.replace('https://www.facebook.com/', '').split('/')[0];
+      const token = "INSERISCI_ACCESS_TOKEN";
+
+      try {
+        const res = await fetch(`https://graph.facebook.com/v23.0/${pageId}?fields=name,emails&access_token=${token}`);
+        const data = await res.json();
+
+        if (data.error) {
+          output.innerHTML = `❌ Errore: ${data.error.message}`;
+        } else {
+          output.innerHTML = `<strong>Nome:</strong> ${data.name || 'N/D'}<br><strong>Email:</strong> ${data.emails?.[0] || 'Non disponibile'}`;
+        }
+      } catch (err) {
+        output.innerHTML = "❌ Errore durante la richiesta.";
+      }
+    }
+  </script>
+</body>
+</html>
