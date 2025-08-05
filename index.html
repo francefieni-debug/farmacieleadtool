@@ -62,7 +62,7 @@
       }
 
       const pageId = page.replace('https://www.facebook.com/', '').split('/')[0];
-      const token = EAASSwbVkneABPFTUKT94f59fURi5DYNRP6JTwRkvaukqGn5NXncxJWPz85GOjtVznKIYRWEv5qZBD8GVzNX9d8hJR2te5nMRqftwACsvZA0OYVx4bjDCnQ6qGL0AZC0ZA00oydR9g2sXLjuXEZCwHtwdO19p1XuHyfz015ZALpZByL50SpEld6zkHBb2ZAZBo3ZBg9lwBvd48rO85pLZC3ekvAc8mZCdamg2mPgaKoZCSqldFywWokHgWIACmN38UZAZA8ZD;
+      const token = "EAASSwbVkneABPFTUKT94f59fURi5DYNRP6JTwRkvaukqGn5NXncxJWPz85GOjtVznKIYRWEv5qZBD8GVzNX9d8hJR2te5nMRqftwACsvZA0OYVx4bjDCnQ6qGL0AZC0ZA00oydR9g2sXLjuXEZCwHtwdO19p1XuHyfz015ZALpZByL50SpEld6zkHBb2ZAZBo3ZBg9lwBvd48rO85pLZC3ekvAc8mZCdamg2mPgaKoZCSqldFywWokHgWIACmN38UZAZA8ZD;"
 
       try {
         const res = await fetch(`https://graph.facebook.com/v23.0/${pageId}?fields=name,emails&access_token=${token}`);
